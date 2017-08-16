@@ -1,0 +1,7 @@
+<div layout="row" layout-align="space-between center">
+    <ng-transclude ng-transclude-slot="title" flex="grow">
+        <h3>{{$ctrl.title}}</h3>
+    </ng-transclude>
+
+    <ng-transclude ng-transclude-slot="toolbar" flex="none"></ng-transclude>
+</div>

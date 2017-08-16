@@ -1,0 +1,19 @@
+app-ws-entry-basic-input {
+    md-icon.file-button {
+        position: relative;
+        width: 88px;
+        height: 36px;
+        text-align: center;
+        line-height: 36px;
+        margin: 6px 8px;
+        padding: 0px 6px;
+        >label {
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+    }
+}

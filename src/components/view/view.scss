@@ -1,0 +1,107 @@
+app-view {
+    position: relative;
+    display: block;
+    height: 100vh;
+
+    .app-view-inner {
+        height: 100%;
+
+        .app-view-user-info {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-items: start;
+
+            > span {
+                margin-left: 8px;
+            }
+        }
+
+        &.device-mode {
+            overflow: hidden;
+        }
+
+        &.desktop-mode {
+            .app-view-header {
+                .md-toolbar-tools {
+                    height: 64px;
+                    max-height: 64px;
+                }
+            }
+
+            .app-view-body {
+                display: flex;
+                flex-flow: row wrap;
+                height: calc(100% - 64px);
+            }
+
+            .app-view-side-nav-bar {
+                position: relative;
+                display: block;
+                width: 4px;
+                margin-right: 15px;
+
+                .app-view-side-nav-toggler {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    width: 18px;
+                    height: 96px;
+                    min-width: 0;
+                    margin: auto;
+                    padding: 0;
+
+                    .material-icons {
+                        width: 18px;
+                        min-width: 18px;
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .app-view-content {
+                flex: 1 0 0px;
+            }
+        }
+    }
+
+    .app-view-busy-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+    }
+}
+
+/* body直下に生成されるため、app-viewタグ内に指定できない */
+md-menu-content.app-view-menu-content {
+    max-height: 95vh;
+
+    .app-view-user-info {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-items: start;
+
+        > app-avatar {
+            margin-left: 16px;
+            padding: 0;
+        }
+
+        > span {
+            padding: 0 12px;
+            font-weight: bolder;
+        }
+    }
+
+    .app-view-basic-menu {
+        /* angular-materialでtransitionが指定されているため、表示/非表示に一瞬固まって見えるのを抑止 */
+        /* TODO: 通常メニューの開閉アニメーションを付ける場合は、この指定を除去する */
+        transition: initial;
+    }
+
+    .app-view-nav {
+        /* angular-materialでtransitionが指定されているため、表示/非表示に一瞬固まって見えるのを抑止 */
+        transition: initial;
+    }
+}
