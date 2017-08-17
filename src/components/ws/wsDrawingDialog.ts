@@ -21,7 +21,7 @@ export default class WsDrawingDialog extends AppDialog {
      */
     public static getDialogOptions($event): ng.material.IDialogOptions {
         const options = super.getDialogOptions($event);
-        options.templateUrl = "./wsDrawingDialog.html";
+        options.templateUrl = "../components/ws/wsDrawingDialog.html";
         options.fullscreen = true;
         return options;
     }

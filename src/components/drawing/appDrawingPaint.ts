@@ -11,7 +11,7 @@ export default class AppDrawingPaint extends ComponentBase {
   protected static setOptions(options: ng.IComponentOptions) {
     super.setOptions(options);
 
-    options.templateUrl = './appDrawingPaint.html';
+    options.templateUrl = '../components/drawing/appDrawingPaint.html';
     options.controllerAs = 'paintCtrl';
     options.bindings = {
       isNewPaint: '<',

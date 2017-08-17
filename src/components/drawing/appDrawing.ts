@@ -12,7 +12,7 @@ export default class AppDrawing extends ComponentBase {
     super.setOptions(options);
     options.controllerAs = 'drawCtrl';
     options.bindings = { drawModel: '=' };
-    options.templateUrl = './appDrawing.html';
+    options.templateUrl = '../components/drawing/appDrawing.html';
   }
 
   public static $inject = ['drawService', '$window'];

@@ -19,9 +19,9 @@ export default class AppDrawingSetting extends ComponentBase {
       navigator.userAgent.match(/BlackBerry/i) ||
       navigator.userAgent.match(/Windows Phone/i)
     ) {
-      options.templateUrl = './appDrawingSettingMobile.html';
+      options.templateUrl = '../components/drawing/appDrawingSettingMobile.html';
     } else {
-      options.templateUrl = './appDrawingSetting.html';
+      options.templateUrl = '../components/drawing/appDrawingSetting.html';
     }
   }
 

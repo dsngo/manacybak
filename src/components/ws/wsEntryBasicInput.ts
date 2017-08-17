@@ -1,8 +1,8 @@
+import Models from "../../models/models";
 import IdentityService from "../../services/IdentityService";
 import UploadService from "../../services/uploadService";
 import UserService from "../../services/userService";
 import WsService from "../../services/wsService";
-import Models from "./../../models/models";
 import WsDrawingDialog from "./wsDrawingDialog";
 import WsElementBase from "./wsElementBase";
 
