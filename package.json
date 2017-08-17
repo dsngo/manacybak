@@ -28,7 +28,8 @@
     "which": "^1.2.14"
   },
   "scripts": {
-    "build": "webpack -w --progress"
+    "build": "webpack -w --progress",
+    "lint": "tslint \"src/**/*.ts?(x)\""
   },
   "devDependencies": {
     "@types/angular": "1.5.x",

@@ -13,6 +13,7 @@ module.exports = [
     },
     output: {
       filename: './app/[name]/bundle.js',
+      pathinfo: true,
     },
     devtool: 'cheap-module-eval-source-map',
     resolve: {
@@ -31,7 +32,7 @@ module.exports = [
     externals: [
       nodeExternals({
         importType: 'var',
-        whitelist: [/^lodash/, /^rxjs/, /^setimmediate/, /^md-color-picker/,],
+        whitelist: [/^lodash/, /^rxjs/, /^setimmediate/, /^md-color-picker/],
       }),
     ], // in order to ignore all modules in node_modules folder
     plugins: [
@@ -45,7 +46,7 @@ module.exports = [
         ],
         {
           copyUnmodified: true,
-        }
+        },
       ),
     ],
   },
