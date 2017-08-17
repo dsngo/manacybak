@@ -21,7 +21,7 @@ export default class WsDrawingDialog extends AppDialog {
      */
     public static getDialogOptions($event): ng.material.IDialogOptions {
         const options = super.getDialogOptions($event);
-        options.templateUrl = "../components/ws/wsDrawingDialog.html";
+        options.templateUrl = "./wsDrawingDialog.html";
         options.fullscreen = true;
         return options;
     }
@@ -47,7 +47,7 @@ export default class WsDrawingDialog extends AppDialog {
         const thisComponent = this;
 
         // parentElementパラメーターをダイアログに渡す
-        //const dialogOption = WsDrawingDialog.getDialogOptions($event);
+        // const dialogOption = WsDrawingDialog.getDialogOptions($event);
 
         this.$mdDialog.cancel();
     }

@@ -13,7 +13,7 @@ export default class PageComponent extends ComponentBase {
         options.bindings = options.bindings || {};
 
         // resolveに含まれるkeyをすべてbindingsに追加。resolveされた変数・サービスがbindingできる
-        for (const key in state.resolve) {
+        for (const key of Object.keys(state.resolve)) {
             options.bindings[key] = "<";
         }
     }

@@ -11,7 +11,7 @@ export default class ComponentBase {
     /**
      * コンポーネントオプション
      */
-    protected static setOptions(options: ng.IComponentOptions): void { };
+    protected static setOptions(options: ng.IComponentOptions): void { }
 
     protected static setInheritOptions(options: ng.IComponentOptions): void {
         options.bindings = options.bindings || {};

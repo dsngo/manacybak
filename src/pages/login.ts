@@ -29,7 +29,7 @@ export default class LoginPage extends PageComponent {
     public constructor(
         private $state: uiRouter.StateService,
         private $mdToast: angular.material.IToastService,
-        private identityService: IdentityService
+        private identityService: IdentityService,
     ) {
         super(null);
     }

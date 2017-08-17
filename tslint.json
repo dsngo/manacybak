@@ -5,8 +5,13 @@
     ],
     "jsRules": {},
     "rules": {
+        "one-variable-per-declaration": [
+            false
+        ],
+        "arrow-parens": false,
+        "quotemark": [false],
         "object-literal-sort-keys": false,
-        "member-ordering": false,
+        "member-ordering": [false],
         "no-string-literal": false,
         "max-line-length": [
             true,

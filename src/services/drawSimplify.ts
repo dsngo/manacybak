@@ -1,4 +1,4 @@
-import { PointModel } from "../Models/pointModel"
+import { PointModel } from "../Models/pointModel";
 
 // to suit your point format, run search/replace for '.x' and '.y';
 // for 3D version, see 3d branch (configurability would draw significant performance overhead)
@@ -42,7 +42,7 @@ function getSqSegDist(point: PointModel, pointOne: PointModel, pointTwo: PointMo
 // rest of the code doesn't care about point format
 
 // basic distance-based simplification
-function simplifyRadialDist(points: Array<PointModel>, sqTolerance) {
+function simplifyRadialDist(points: PointModel[], sqTolerance) {
 
     let prevPoint = points[0],
         newPoints = [prevPoint],
@@ -62,7 +62,7 @@ function simplifyRadialDist(points: Array<PointModel>, sqTolerance) {
     return newPoints;
 }
 
-function simplifyDPStep(points: Array<PointModel>, first, last, sqTolerance, simplified) {
+function simplifyDPStep(points: PointModel[], first, last, sqTolerance, simplified) {
     let maxSqDist = sqTolerance,
         index;
 
@@ -83,7 +83,7 @@ function simplifyDPStep(points: Array<PointModel>, first, last, sqTolerance, sim
 }
 
 // simplification using Ramer-Douglas-Peucker algorithm
-function simplifyDouglasPeucker(points: Array<PointModel>, sqTolerance) {
+function simplifyDouglasPeucker(points: PointModel[], sqTolerance) {
     const last = points.length - 1;
 
     const simplified = [points[0]];
@@ -94,7 +94,7 @@ function simplifyDouglasPeucker(points: Array<PointModel>, sqTolerance) {
 }
 
 // both algorithms combined for awesome performance
-export function simplify(points: Array<PointModel>, tolerance, highestQuality) {
+export function simplify(points: PointModel[], tolerance, highestQuality) {
 
     if (points.length <= 2) return points;
 
