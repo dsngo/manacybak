@@ -2,6 +2,7 @@ import Models from './models';
 import { PointModel } from './pointModel';
 export class PathModel {
   constructor(
+    public textId: number = 0,
     public points: string = '',
     public strokeWidth: string = '',
     public stroke: string = '',
@@ -22,7 +23,7 @@ export class PathModel {
         .textBold}" stroke-width="1px">`;
       for (let index = 0; index < this.textValue.length; index++) {
         const element = this.textValue[index];
-        elm += `<tspan x="${this.textPoint.x}" y="${this.textPoint.y +
+        elm += `<tspan textId="${this.textId}" x="${this.textPoint.x}" y="${this.textPoint.y +
           index * this.fontSize}" >${element}</tspan>`;
       }
       elm += '</text>';
@@ -39,11 +40,13 @@ export class PathModel {
     const path = new PathModel();
     path.svgElementDto = data;
     if (doc.documentElement.localName === 'path') {
+      // path.id = doc.documentElement.attributes['id'].value * 1;
       path.isText = false;
       path.points = doc.documentElement.attributes['d'].value;
       path.stroke = doc.documentElement.attributes['stroke'].value;
       path.strokeWidth = doc.documentElement.attributes['stroke-width'].value;
     } else {
+      // path.id = doc.documentElement.attributes['id'].value * 1;
       path.isText = true;
       path.stroke = doc.documentElement.attributes['fill'].value;
       path.fontSize = doc.documentElement.attributes['font-size'].value * 1;

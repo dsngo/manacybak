@@ -55,7 +55,17 @@ export default class AppDrawing extends ComponentBase {
   protected currentPath: PathModel = null;
   protected textValue: string = '';
 
-  public mouseDown(event: MouseEvent) {
+  public mouseDown(event) {
+    if (event.target.nodeName === 'tspan') {
+      console.log(
+        this.drawingBranch.find(
+          e => e.textId === parseInt(event.target.attributes[0].value, 10),
+        ),
+      );
+      console.log(typeof event.target.attributes[0].value);
+      console.log(typeof this.drawingBranch[0].textId);
+      return;
+    }
     this.startDraw(event.x, event.y);
   }
 

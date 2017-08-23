@@ -96,6 +96,7 @@ export default class DrawService extends ServiceBase {
 
   public drawText(point: PointModel, drawModel: DrawModel, textValue: string) {
     const path: PathModel = new PathModel();
+    path.textId = Date.now();
     path.textPoint = point;
     path.textValue = textValue.split('\n');
     path.stroke = drawModel.color;
