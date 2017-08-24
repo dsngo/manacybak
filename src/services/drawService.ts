@@ -93,7 +93,12 @@ export default class DrawService extends ServiceBase {
   public startDraw() {
     this.drawingPoints = [];
   }
-
+  //  edit text
+  public editText(newText: string, id: number) {
+    const dIndex = this.drawingPath.findIndex(e => e.textId === id);
+    this.drawingPath[dIndex].textValue = newText.split('\n');
+    console.log(this.drawingPath);
+  }
   public drawText(point: PointModel, drawModel: DrawModel, textValue: string) {
     const path: PathModel = new PathModel();
     path.textId = Date.now();
@@ -158,9 +163,13 @@ export default class DrawService extends ServiceBase {
     let attribute = `M${points[0].x}, ${points[0].y}`;
     for (let i = 0; i < cubics.length; i++) {
       if (i === cubics.length - 1) {
-        attribute += `M${cubics[i][0]},${cubics[i][1]}, ${cubics[i][2]},${cubics[i][3]} ${cubics[i][4]},${cubics[i][5]}`;
+        attribute += `M${cubics[i][0]},${cubics[i][1]}, ${cubics[
+          i
+        ][2]},${cubics[i][3]} ${cubics[i][4]},${cubics[i][5]}`;
       } else {
-        attribute += `C${cubics[i][0]},${cubics[i][1]}, ${cubics[i][2]},${cubics[i][3]} ${cubics[i][4]},${cubics[i][5]}`;
+        attribute += `C${cubics[i][0]},${cubics[i][1]}, ${cubics[
+          i
+        ][2]},${cubics[i][3]} ${cubics[i][4]},${cubics[i][5]}`;
       }
     }
     return this.setPath(attribute);

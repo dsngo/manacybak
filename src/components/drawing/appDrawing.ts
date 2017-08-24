@@ -54,17 +54,22 @@ export default class AppDrawing extends ComponentBase {
   protected drawingBranch: PathModel[] = [];
   protected currentPath: PathModel = null;
   protected textValue: string = '';
+  protected newTextValue: string = 'text changed';
 
-  public mouseDown(event) {
+  public mouseDown(event): void {
     if (event.target.nodeName === 'tspan') {
-      console.log(
-        this.drawingBranch.find(
-          e => e.textId === parseInt(event.target.attributes[0].value, 10),
-        ),
+      // const foundText = this.drawingBranch.find(
+      //   e => e.textId === parseInt(event.target.attributes[0].value, 10),
+      // );
+      this.drawService.editText(
+        this.newTextValue,
+        parseInt(event.target.attributes['text-id'].value, 10),
       );
-      console.log(typeof event.target.attributes[0].value);
-      console.log(typeof this.drawingBranch[0].textId);
       return;
+      // console.log(foundText);
+      // console.log(typeof event.target.attributes['text-id'].value);
+      // console.log(typeof this.drawingBranch[0].textId);
+      // console.log(this.textValue);
     }
     this.startDraw(event.x, event.y);
   }
