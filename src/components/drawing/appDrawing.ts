@@ -54,22 +54,18 @@ export default class AppDrawing extends ComponentBase {
   protected drawingBranch: PathModel[] = [];
   protected currentPath: PathModel = null;
   protected textValue: string = '';
-  protected newTextValue: string = 'text changed';
+  protected newTextValue: string = '';
+  protected isTextEditing: boolean = false;
 
   public mouseDown(event): void {
     if (event.target.nodeName === 'tspan') {
-      // const foundText = this.drawingBranch.find(
-      //   e => e.textId === parseInt(event.target.attributes[0].value, 10),
-      // );
-      this.drawService.editText(
-        this.newTextValue,
-        parseInt(event.target.attributes['text-id'].value, 10),
+      this.startEditText(
+        event.x,
+        event.y,
+        event.target.textContent,
+        event.target.attributes['text-id'].value,
       );
       return;
-      // console.log(foundText);
-      // console.log(typeof event.target.attributes['text-id'].value);
-      // console.log(typeof this.drawingBranch[0].textId);
-      // console.log(this.textValue);
     }
     this.startDraw(event.x, event.y);
   }
@@ -110,6 +106,24 @@ export default class AppDrawing extends ComponentBase {
     this.textBoxSetLeft = x;
     this.textBoxSetTop = y;
     this.isTextDrawing = true;
+  }
+
+  private startEditText(x, y, text, textId) {
+    if (this.isTextEditing && this.newTextValue !== '') {
+      this.drawService.editText(
+        this.newTextValue,
+        parseInt(textId, 10),
+      );
+      this.newTextValue = '';
+      this.isTextEditing = false;
+      this.textRows = 1;
+      this.textCol = 20;
+      return;
+    }
+    this.newTextValue = text;
+    this.textBoxSetLeft = x;
+    this.textBoxSetTop = y;
+    this.isTextEditing = true;
   }
 
   protected calculatePoint(): PointModel {
