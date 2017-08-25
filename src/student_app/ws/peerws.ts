@@ -1,7 +1,7 @@
 import * as uiRouter from "angular-ui-router";
 import * as _ from "lodash";
 import AutoRefreshWsPage from "../../pages/autoRefreshWs";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import app from "../app";
 
 class PeerWorksheetPage extends AutoRefreshWsPage {
@@ -48,8 +48,8 @@ class PeerWorksheetPage extends AutoRefreshWsPage {
     }
 
     public get userGroups() {
-        return this.wsService.myUserGroups;
-        // return this.wsService.ws.enableGroup ? this.wsService.myUserGroups : this.wsService.userGroups;
+        return this.wsAssignmentService.myUserGroups;
+        // return this.wsAssignmentService.ws.enableGroup ? this.wsAssignmentService.myUserGroups : this.wsAssignmentService.userGroups;
     }
 
     public onUserClick(userId: DtoIdType) {

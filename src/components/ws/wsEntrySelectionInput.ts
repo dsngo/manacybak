@@ -82,22 +82,22 @@ export default class WsEntrySelectionInput extends WsElementBase {
      */
     public get isPositionRihght(): boolean {
         const selection = this.element.content.entrySettings.selection;
-         if (selection && selection.isShowRight) {
-             return selection.isShowRight
-         }
-         return false;
+        if (selection && selection.isShowRight) {
+            return selection.isShowRight
+        }
+        return false;
     }
 
     /**
-     * 
+     *
      */
     public get isShowBorder(): boolean {
         const selection = this.element.content.entrySettings.selection;
-         if (selection && selection.isShowBorder) {
-             return selection.isShowBorder
-         }
-         return false;
-     }
+        if (selection && selection.isShowBorder) {
+            return selection.isShowBorder
+        }
+        return false;
+    }
 
     /**
      * 現在選択している選択肢の数
@@ -198,10 +198,10 @@ export default class WsEntrySelectionInput extends WsElementBase {
             });
         }
 
-        this.wsService.postEntry(this.element, {
+        this.wsAssignmentService.postEntry(this.element, {
             wsEntryTypeId: Models.Worksheet.WsEntryTypeEnum.selection,
             ownerUserId: this.ownerUserId as number,
-            sequenceNo: 0,
+            assignmentId: this.wsAssignmentService.assignment.id,
             jsonData: JSON.stringify({
                 selectedIndex,
             }),

@@ -14,7 +14,7 @@ export default class AppDrawingSetting extends ComponentBase {
       navigator.userAgent.match(/Android/i) ||
       navigator.userAgent.match(/webOS/i) ||
       navigator.userAgent.match(/iPhone/i) ||
-      navigator.userAgent.match(/iPad/i) ||
+      // navigator.userAgent.match(/iPad/i) ||
       navigator.userAgent.match(/iPod/i) ||
       navigator.userAgent.match(/BlackBerry/i) ||
       navigator.userAgent.match(/Windows Phone/i)
@@ -38,11 +38,21 @@ export default class AppDrawingSetting extends ComponentBase {
   private mobileBottom: string = '';
   private mobileRotate: string = 'mobile-rotate';
 
-  public static $inject = ['drawService', '$window'];
+  public static $inject = ["drawService", "$window", "$mdDialog"];
 
   private drawModel: DrawModel;
 
   private strokeItems: any[] = [1, 5, 10, 20, 50, 100, 200];
+
+  public cancel(): void {
+
+      const thisComponent = this;
+
+      // parentElementパラメーターをダイアログに渡す
+      //const dialogOption = WsDrawingDialog.getDialogOptions($event);
+
+      this.$mdDialog.cancel();
+  }
 
   private scrollStrokeValue(): void {
     const staticStrokeItems: any[] = [1, 1, 5, 10, 20, 50, 100, 200];
@@ -96,6 +106,7 @@ export default class AppDrawingSetting extends ComponentBase {
   public constructor(
     public drawService: DrawService,
     public window: ng.IWindowService,
+	public $mdDialog: ng.material.IDialogService
   ) {
     super();
     this.toolSetRight = window.innerWidth - 20;

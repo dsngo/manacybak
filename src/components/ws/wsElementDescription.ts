@@ -1,5 +1,5 @@
 import Models from "../../models/models";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import WsElementBase from "./wsElementBase";
 
 export default class WsElementDescription extends WsElementBase {

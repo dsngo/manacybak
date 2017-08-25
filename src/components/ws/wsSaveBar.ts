@@ -1,4 +1,4 @@
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 
 export default class WsSaveBar extends ComponentBase {
@@ -18,21 +18,21 @@ export default class WsSaveBar extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID, "$scope"];
+    public static $inject = [WsAssignmentService.IID, "$scope"];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public $scope: ng.IScope,
     ) {
         super();
     }
 
     public save() {
-        this.wsService.save(this.$scope);
+        this.wsAssignmentService.save(this.$scope);
     }
 
 }

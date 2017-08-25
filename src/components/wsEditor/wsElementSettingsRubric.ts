@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import Models from "../../models/models";
 import WsEditorService from "../../services/wsEditorService";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import WsElementSettingsSelection from "./wsElementSettingsSelection";
 
 export default class WsElementSettingsRubric extends WsElementSettingsSelection {

@@ -1,8 +1,8 @@
-import Models from "../../models/models";
 import IdentityService from "../../services/IdentityService";
 import UploadService from "../../services/uploadService";
 import UserService from "../../services/userService";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
+import Models from "./../../models/models";
 import WsDrawingDialog from "./wsDrawingDialog";
 import WsElementBase from "./wsElementBase";
 
@@ -25,14 +25,14 @@ export default class WsEntryBasicInput extends WsElementBase {
      * InjectするService
      */
     public static $inject =
-    [WsService.IID, UserService.IID, IdentityService.IID, "$scope", "$interval", "$mdDialog", "$element", UploadService.IID];
+    [WsAssignmentService.IID, UserService.IID, IdentityService.IID, "$scope", "$interval", "$mdDialog", "$element", UploadService.IID];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public userService: UserService,
         public identityService: IdentityService,
         public $scope: ng.IScope,
@@ -41,7 +41,7 @@ export default class WsEntryBasicInput extends WsElementBase {
         public $element: any,
         public uploadService: UploadService,
     ) {
-        super(wsService, userService, identityService, $scope);
+        super(wsAssignmentService, userService, identityService, $scope);
     }
 
     public hideHeader: boolean;
@@ -110,14 +110,14 @@ export default class WsEntryBasicInput extends WsElementBase {
     }
 
     private postEntry(wsEntryTypeId: Models.Worksheet.WsEntryTypeEnum, data: WsEntry.IData, textData: string) {
-        this.wsService.postEntry(this.element, {
+        this.wsAssignmentService.postEntry(this.element, {
             wsEntryTypeId,
             ownerUserId: this.ownerUserId as number,
-            sequenceNo: 0,
+            assignmentId: this.wsAssignmentService.assignment.id,
             jsonData: JSON.stringify(data),
             textData,
         }).then((entry) => {
-            this.wsService.reLoad(this.$scope);
+            this.wsAssignmentService.reLoad(this.$scope);
         });
     }
 
@@ -165,34 +165,7 @@ export default class WsEntryBasicInput extends WsElementBase {
         return this.textEntry !== (entry ? entry.jsonData.text : "");
     }
 
-    public openNewDrawing($event): void {
-        const thisComponent = this;
-
-        console.log("start");
-        // parentElementパラメーターをダイアログに渡す
-        const dialogOption = WsDrawingDialog.getDialogOptions($event);
-
-        dialogOption.openFrom = $event.target;
-        dialogOption.closeTo = $event.target;
-
-        this.$mdDialog.show(dialogOption);
-
-    }
-
-    public openDrawingWithImage($event): void {
-        const thisComponent = this;
-
-        // parentElementパラメーターをダイアログに渡す
-        const dialogOption = WsDrawingDialog.getDialogOptions($event);
-
-        dialogOption.openFrom = $event.target;
-        dialogOption.closeTo = $event.target;
-
-        this.$mdDialog.show(dialogOption);
-
-    }
-
-    public openExistingDrawing($event): void {
+    public openDrawing($event): void {
         const thisComponent = this;
 
         // parentElementパラメーターをダイアログに渡す
@@ -210,7 +183,7 @@ export default class WsEntryBasicInput extends WsElementBase {
             files.forEach((file) => {
                 // ファイルをアップロードする
                 this.uploadService.upload(file, Models.Media.BlobTypeEnum.Images)
-                // Entryを作成する
+                    // Entryを作成する
                     .then((uploadFileInfo) => this.postUploadEntry(Models.Worksheet.WsEntryTypeEnum.image, uploadFileInfo));
             });
         }
@@ -245,6 +218,14 @@ export default class WsEntryBasicInput extends WsElementBase {
                     // Entryを作成する
                     .then((uploadFileInfo) => this.postUploadEntry(Models.Worksheet.WsEntryTypeEnum.file, uploadFileInfo));
             });
+        }
+    }
+
+    public isTextEmpty(): boolean {
+        if (this.textEntry === "") {
+            return true;
+        } else {
+            return false;
         }
     }
 }

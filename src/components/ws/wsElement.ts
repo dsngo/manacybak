@@ -1,7 +1,7 @@
 import Models from "../../models/models";
 import IdentityService from "../../services/IdentityService";
 import UserService from "../../services/userService";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import WsElementBase from "./wsElementBase";
 
 export default class WsElement extends WsElementBase {
@@ -22,20 +22,20 @@ export default class WsElement extends WsElementBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID, UserService.IID, IdentityService.IID, "$scope", "$sce"];
+    public static $inject = [WsAssignmentService.IID, UserService.IID, IdentityService.IID, "$scope", "$sce"];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public userService: UserService,
         public identityService: IdentityService,
         public $scope: ng.IScope,
         public $sce: ng.ISCEService,
     ) {
-        super(wsService, userService, identityService, $scope);
+        super(wsAssignmentService, userService, identityService, $scope);
     }
 
     /**

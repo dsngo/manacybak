@@ -318,7 +318,7 @@ WsEditorPage.IID = "auth.ws.editor";
 WsEditorPage.state = {
     url: "/editor",
     resolve: {
-        wsService: [wsEditorService_1.default.IID, function (wsEditorService) {
+        wsAssignmentService: [wsEditorService_1.default.IID, function (wsEditorService) {
                 return wsEditorService.load().then(function (service) { return service; });
             }],
     },
@@ -351,14 +351,14 @@ var WsElementsPage = (function (_super) {
         options.templateUrl = "./ws/wsElements.html";
     };
     WsElementsPage.prototype.$onInit = function () {
-        this.userGroups = this.wsService.userGroups;
+        this.userGroups = this.wsAssignmentService.userGroups;
     };
     WsElementsPage.prototype.onElementSelected = function (elementId) {
         this.selectedElementId = elementId;
     };
     Object.defineProperty(WsElementsPage.prototype, "selectedElement", {
         get: function () {
-            return this.wsService.elements[this.selectedElementId];
+            return this.wsAssignmentService.elements[this.selectedElementId];
         },
         enumerable: true,
         configurable: true
@@ -421,7 +421,7 @@ var WsStudentsPage = (function (_super) {
     };
     Object.defineProperty(WsStudentsPage.prototype, "userGroups", {
         get: function () {
-            return this.wsService.userGroups;
+            return this.wsAssignmentService.userGroups;
         },
         enumerable: true,
         configurable: true

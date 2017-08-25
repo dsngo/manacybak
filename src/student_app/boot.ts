@@ -19,7 +19,7 @@ registerComponents(app.getModule());
 registerPages(app.getModule());
 
 // 共通ディレクティブ登録
-// registerDirectives(app.getModule());
+registerDirectives(app.getModule());
 
 // ページ登録
 import "./albums/albums";

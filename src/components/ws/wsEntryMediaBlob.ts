@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import Models from "../../models/models";
 import ComponentBase from "../componentBase";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 
 export default class WsEntryMediaBlob extends ComponentBase {
     /**
@@ -27,14 +27,14 @@ export default class WsEntryMediaBlob extends ComponentBase {
 
     protected blobData: Models.Dtos.BlobUrlDto;
 
-    public static $inject: string[] = ["$timeout", WsService.IID];
+    public static $inject: string[] = ["$timeout", WsAssignmentService.IID];
 
-    public constructor(private $timeout: ng.ITimeoutService, private wsService: WsService) {
+    public constructor(private $timeout: ng.ITimeoutService, private wsAssignmentService: WsAssignmentService) {
         super();
     }
 
     protected $onInit(): void {
-        this.load();
+        this.load().then(() => this.onLoaded());
     }
 
     /**
@@ -52,10 +52,15 @@ export default class WsEntryMediaBlob extends ComponentBase {
     /**
      * ファイル情報を読み込む。
      */
-    private load(): void {
-        this.wsService.fetchBlobData(this.entry.jsonData.file.fileId)
+    private load(): ng.IPromise<void> {
+        return this.wsAssignmentService.fetchBlobData(this.entry.jsonData.file.fileId)
             .then((b) => this.blobData = b)
             .catch(() => this.$timeout(() => this.load(), WsEntryMediaBlob.RELOAD_TIME))
             .then(() => void 0);
     }
+
+    /**
+     * ファイル情報の読込完了時に実行する。
+     */
+    protected onLoaded(): void {/* no process */}
 }

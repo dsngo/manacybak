@@ -1,4 +1,4 @@
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 
 export default class WsEditorView extends ComponentBase {
@@ -20,14 +20,14 @@ export default class WsEditorView extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID];
+    public static $inject = [WsAssignmentService.IID];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
     ) {
         super();
     }
@@ -36,7 +36,7 @@ export default class WsEditorView extends ComponentBase {
      * WSが白紙かどうか
      */
     public get isBlank() {
-        return this.wsService.getChildElements(this.wsService.rootElement).length === 0;
+        return this.wsAssignmentService.getChildElements(this.wsAssignmentService.rootElement).length === 0;
     }
 
 }

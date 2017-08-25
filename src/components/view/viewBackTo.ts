@@ -14,30 +14,14 @@ export default class ViewBackTo extends ComponentBase {
      */
     protected static setOptions(options: ng.IComponentOptions) {
         options.templateUrl = "../components/view/viewBackTo.html";
-        options.bindings = {
-            state: "@",
-            params: "<?",
-        };
     }
 
     /**
-     * 戻り先ステート
+     * 一つ前の画面に戻る。
      */
-    public state: string;
-
-    /**
-     * 戻り先パラメータ
-     */
-    public params: {};
-
-    /**
-     * 戻り先の参照を取得する。
-     */
-    get sref(): string {
-        if (this.params == null) {
-            return this.state;
-        }
-
-        return `${this.state}(${JSON.stringify(this.params)})`;
+    public back(): void {
+        // TODO: 「一つ前の画面に戻る」を最適な挙動で実装するのは、簡単ではない。
+        // そのため、とりあえずブラウザバックと同じ動作で実装する。
+        history.back();
     }
 }

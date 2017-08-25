@@ -1,7 +1,7 @@
 import * as angular from "angular";
 import Models from "../../models/models";
 import WsEditorService from "../../services/wsEditorService";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 import WsSelectOrigins from "../wsEditor/wsSelectOrigins";
 
@@ -14,7 +14,7 @@ export default class WsAddElementButton extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = ["$mdDialog", WsEditorService.IID, WsService.IID, "$mdMenu"];
+    public static $inject = ["$mdDialog", WsEditorService.IID, WsAssignmentService.IID, "$mdMenu"];
 
     /**
      * コンポーネントオプション
@@ -39,12 +39,12 @@ export default class WsAddElementButton extends ComponentBase {
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
         public $mdDialog: ng.material.IDialogService,
         public wsEditorService: WsEditorService,
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public $mdMenu: ng.material.IMenuService,
     ) {
         super();
@@ -76,7 +76,7 @@ export default class WsAddElementButton extends ComponentBase {
         const dialogOption = WsSelectOrigins.getDialogOptions($event);
         const position = this.position.toLowerCase();
         if (position === "after" || position === "before") {
-            dialogOption.locals = { parentElement: this.wsService.elements[this.baseElement.property.parentId] };
+            dialogOption.locals = { parentElement: this.wsAssignmentService.elements[this.baseElement.property.parentId] };
         } else {
             dialogOption.locals = { parentElement: this.baseElement };
         }

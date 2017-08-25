@@ -24,7 +24,7 @@ export default class WsSelectOrigins extends AppDialog {
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
         public $mdDialog: ng.material.IDialogService,

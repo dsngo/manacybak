@@ -25,7 +25,7 @@ export default class WsEntryDiscussion extends WsElementBase {
     protected onLoad(): void {
         // entriesを初期化
         this.getEntries(Models.Worksheet.WsEntryTypeEnum.discussion).forEach((entry) => {
-            if (this.wsService.CheckEntryEnable(entry, this.ownerUserId)) {
+            if (this.wsAssignmentService.CheckEntryEnable(entry, this.ownerUserId)) {
                 this.initEntry(entry);
             }
         });
@@ -42,10 +42,10 @@ export default class WsEntryDiscussion extends WsElementBase {
     }
 
     public onTopicPost() {
-        this.wsService.postEntry(this.element, {
+        this.wsAssignmentService.postEntry(this.element, {
             wsEntryTypeId: Models.Worksheet.WsEntryTypeEnum.discussion,
             ownerUserId: this.ownerUserId as number,
-            sequenceNo: 0,
+            assignmentId: this.wsAssignmentService.assignment.id,
             jsonData: JSON.stringify({
                 parentId: null,
                 title: this.topicTitle,
@@ -61,10 +61,10 @@ export default class WsEntryDiscussion extends WsElementBase {
     }
 
     public onCommentPost(parentId: DtoIdType) {
-        this.wsService.postEntry(this.element, {
+        this.wsAssignmentService.postEntry(this.element, {
             wsEntryTypeId: Models.Worksheet.WsEntryTypeEnum.discussion,
             ownerUserId: this.ownerUserId as number,
-            sequenceNo: 0,
+            assignmentId: this.wsAssignmentService.assignment.id,
             jsonData: JSON.stringify({
                 parentId,
                 text: this.commentText,

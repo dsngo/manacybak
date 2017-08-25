@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import Models from "../../models/models";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 import { IWsElementParams } from "./wsElementParams";
 
@@ -36,14 +36,14 @@ export default class WsElementView extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID, "$scope"];
+    public static $inject = [WsAssignmentService.IID, "$scope"];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         protected $scope: ng.IScope,
     ) {
         super();
@@ -80,12 +80,12 @@ export default class WsElementView extends ComponentBase {
      */
     public countUsersInGroup(group: Models.Dtos.DisplayUserDto[]): number {
         return group.reduce((prev, curr, index, arr) => {
-            return Object.keys(this.wsService.getEntriesByAuthor(this.element, curr.id)).length > 0 ? prev + 1 : prev;
+            return Object.keys(this.wsAssignmentService.getEntriesByAuthor(this.element, curr.id)).length > 0 ? prev + 1 : prev;
         }, 0);
     }
 
     public countUsersInOwner(ownerUserId: DtoIdType): number {
-        return Object.keys(this.wsService.getEntriesByAuthor(this.element, ownerUserId)).length;
+        return Object.keys(this.wsAssignmentService.getEntriesByAuthor(this.element, ownerUserId)).length;
     }
 
     public get othersWritable(): boolean {

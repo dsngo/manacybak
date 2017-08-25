@@ -24,7 +24,7 @@ class WsEditorPage extends WsPage {
     {
         url: "/editor",
         resolve: {
-            wsService: [WsEditorService.IID, (wsEditorService: WsEditorService) => {
+            wsAssignmentService: [WsEditorService.IID, (wsEditorService: WsEditorService) => {
                 return wsEditorService.load().then((service) => service);
             }],
         },

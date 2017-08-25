@@ -13,7 +13,7 @@ export default class PageComponent extends ComponentBase {
         options.bindings = options.bindings || {};
 
         // resolveに含まれるkeyをすべてbindingsに追加。resolveされた変数・サービスがbindingできる
-        for (const key of Object.keys(state.resolve)) {
+        for (const key in state.resolve) {
             options.bindings[key] = "<";
         }
     }
@@ -49,7 +49,7 @@ export default class PageComponent extends ComponentBase {
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
         public $scope: ng.IScope,

@@ -1,6 +1,6 @@
 import AuthorizedPage from "./authorizedPage";
 import LoginPage from "./login";
-import UserPage from "./user";
+import UserPage from "./user"
 import WsPage from "./ws";
 
 export default function registerPages(app: ng.IModule) {

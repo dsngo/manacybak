@@ -1,8 +1,9 @@
 <!--<div layout="row">-->
 <div ng-repeat="entry in $ctrl.entries | filter: $ctrl.entryFilter track by entry.id" ng-click="$ctrl.showDialog($event, $index)">
     <app-ws-entry-media-image ng-if="$ctrl.helper.isImage(entry)" entry="entry"></app-ws-entry-media-image>
-    <app-ws-entry-media-video ng-if="$ctrl.helper.isVideo(entry)" entry="entry"></app-ws-entry-media-video>
+    <app-ws-entry-media-video ng-if="$ctrl.helper.isVideo(entry)" entry="entry" layout-type="mini"></app-ws-entry-media-video>
     <app-ws-entry-media-audio ng-if="$ctrl.helper.isAudio(entry)" entry="entry"></app-ws-entry-media-audio>
+    <app-ws-entry-media-file ng-if="$ctrl.helper.isFile(entry)" entry="entry"></app-ws-entry-media-file>
 </div>
 
 

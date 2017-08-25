@@ -84,8 +84,7 @@ export default class UserService extends ServiceBase {
     }
 
     public getDisplayName(userId: DtoIdType): string {
-        // return this.getUser(userId).displayName; // this is the original code.
-        return; // this is only for development purposes, remove this if necessary and uncomment the above line.
+        return this.getUser(userId).displayName;
     }
 
 }

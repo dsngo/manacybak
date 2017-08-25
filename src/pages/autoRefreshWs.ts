@@ -22,8 +22,8 @@ export default class AutoRefreshWsPage extends WsPage {
         // 指定の時間毎にワークシート情報を再読込する。
         const refreshAsync = () => {
             this.refreshPromise = this.$timeout(() => {
-                this.wsService.load(this.$stateParams.wsId).then(() => {
-                    this.wsService.reLoad(this.$scope);
+                this.wsAssignmentService.load(this.$stateParams.wsId).then(() => {
+                    this.wsAssignmentService.reLoad(this.$scope);
                     refreshAsync();
                 });
             }, AutoRefreshWsPage.REFRESH_POLING_TIME);

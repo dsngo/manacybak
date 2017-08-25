@@ -2,7 +2,7 @@ import * as _ from "lodash";
 import * as restangular from "restangular";
 import Models from "../models/models";
 import ServiceBase from "./serviceBase";
-import WsService from "./wsService";
+import WsAssignmentService from "./wsAssignmentService";
 
 // declare global {
 //     const WsEditorServiceIID = 'wsEditorService';
@@ -17,7 +17,7 @@ export default class WsEditorService extends ServiceBase {
     /**
      * インジェクトするサービス
      */
-    private static $inject = ["Restangular", "$q", WsService.IID];
+    private static $inject = ["Restangular", "$q", WsAssignmentService.IID];
 
     // export const enum WsElementTypeEnum {
     //     noentry = 0,
@@ -87,7 +87,7 @@ export default class WsEditorService extends ServiceBase {
     public constructor(
         protected Restangular: restangular.IService,
         protected $q: ng.IQService,
-        protected wsService: WsService,
+        protected wsAssignmentService: WsAssignmentService,
     ) {
         super();
     }
@@ -135,7 +135,7 @@ export default class WsEditorService extends ServiceBase {
      * Element配列関連データの初期化
      */
     private InitiallizeData(): void {
-        this.initialElementsBy = _.cloneDeep(this.wsService.elements);
+        this.initialElementsBy = _.cloneDeep(this.wsAssignmentService.elements);
         this.originBy = _.keyBy(this.originArray, "wsElementId");
         this.originCategoryBy = _.keyBy(this.originCategoryArray, "id");
     }
@@ -144,7 +144,7 @@ export default class WsEditorService extends ServiceBase {
      * ワークシートを新規作成する
      * @param create パラメーター
      */
-    public createWs(create: Models.Dtos.CreateWsDto): ng.IPromise<void> {
+    public createWs(create: Models.Dtos.WsDto): ng.IPromise<void> {
         this.busy(true);
         const thisService = this;
 
@@ -175,7 +175,7 @@ export default class WsEditorService extends ServiceBase {
             .then((elements: Models.Dtos.WsElementDto[]) => {
                 // 追加されたElementをデータに追加する
                 elements.forEach((element) => {
-                    thisService.wsService.addElement(element);
+                    thisService.wsAssignmentService.addElement(element);
                     thisService.initialElementsBy[element.wsElementId] = _.cloneDeep(element);
                 });
                 return;
@@ -241,7 +241,7 @@ export default class WsEditorService extends ServiceBase {
                     .one("elements", activeElement.wsElementId)
                     .customPOST(content, "contents")
                     .then((element: Models.Dtos.WsElementDto) => {
-                        this.wsService.initElement(element);       // JSON文字列をParseする
+                        this.wsAssignmentService.initElement(element);       // JSON文字列をParseする
                         activeElement.content = element.content;
                         initialElement.content = _.cloneDeep(element.content);
                         return;
@@ -280,7 +280,7 @@ export default class WsEditorService extends ServiceBase {
             .customDELETE("")
             .then(() => {
                 // 追加されたElementをデータに追加する
-                thisService.wsService.deleteElement(id);
+                thisService.wsAssignmentService.deleteElement(id);
                 delete thisService.initialElementsBy[id];
                 return;
             })

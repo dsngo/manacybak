@@ -1,6 +1,6 @@
 import Models from "../../models/models";
 import WsEditorService from "../../services/wsEditorService";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 
 export default class WsElementEditor extends ComponentBase {
@@ -29,14 +29,14 @@ export default class WsElementEditor extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID, WsEditorService.IID, "$mdDialog"];
+    public static $inject = [WsAssignmentService.IID, WsEditorService.IID, "$mdDialog"];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public wsEditorService: WsEditorService,
         public $mdDialog: ng.material.IDialogService,
     ) {

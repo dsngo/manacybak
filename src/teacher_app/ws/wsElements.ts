@@ -30,7 +30,7 @@ class WsElementsPage extends AutoRefreshWsPage {
     protected $onInit(): void {
         super.$onInit();
 
-        this.userGroups = this.wsService.userGroups;
+        this.userGroups = this.wsAssignmentService.userGroups;
     }
 
     public onElementSelected(elementId: DtoIdType) {
@@ -38,7 +38,7 @@ class WsElementsPage extends AutoRefreshWsPage {
     }
 
     public get selectedElement() {
-        return this.wsService.elements[this.selectedElementId];
+        return this.wsAssignmentService.elements[this.selectedElementId];
     }
 
 }

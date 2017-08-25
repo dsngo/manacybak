@@ -54,20 +54,12 @@ export default class AppDrawing extends ComponentBase {
   protected drawingBranch: PathModel[] = [];
   protected currentPath: PathModel = null;
   protected textValue: string = '';
-  protected newTextValue: string = '';
-  protected isTextEditing: boolean = false;
 
-  public mouseDown(event): void {
-    if (event.target.nodeName === 'tspan') {
-      this.startEditText(
-        event.x,
-        event.y,
-        event.target.textContent,
-        event.target.attributes['text-id'].value,
-      );
-      return;
-    }
+  public mouseDown(event: MouseEvent) {
     this.startDraw(event.x, event.y);
+    console.log(event.x);
+    console.log(this.drawService.svgImage);
+
   }
 
   public mouseMove(event) {
@@ -106,24 +98,6 @@ export default class AppDrawing extends ComponentBase {
     this.textBoxSetLeft = x;
     this.textBoxSetTop = y;
     this.isTextDrawing = true;
-  }
-
-  private startEditText(x, y, text, textId) {
-    if (this.isTextEditing && this.newTextValue !== '') {
-      this.drawService.editText(
-        this.newTextValue,
-        parseInt(textId, 10),
-      );
-      this.newTextValue = '';
-      this.isTextEditing = false;
-      this.textRows = 1;
-      this.textCol = 20;
-      return;
-    }
-    this.newTextValue = text;
-    this.textBoxSetLeft = x;
-    this.textBoxSetTop = y;
-    this.isTextEditing = true;
   }
 
   protected calculatePoint(): PointModel {

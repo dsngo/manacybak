@@ -1,5 +1,5 @@
 import Models from "../../models/models";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 import { IWsElementParams } from "./wsElementParams";
 
@@ -26,14 +26,14 @@ export default class WsOwnerView extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID, "$scope"];
+    public static $inject = [WsAssignmentService.IID, "$scope"];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public $scope: ng.IScope,
     ) {
         super();

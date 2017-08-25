@@ -28,15 +28,15 @@ export default class WsEntryChat extends WsElementBase {
         const thisComponent = this;
 
         return (entry: Models.Dtos.WsEntryDto, index, array): boolean => {
-            return thisComponent.wsService.CheckEntryEnable(entry, thisComponent.ownerUserId, false);
+            return thisComponent.wsAssignmentService.CheckEntryEnable(entry, thisComponent.ownerUserId, false);
         };
     }
 
     public onPostClick() {
-        this.wsService.postEntry(this.element, {
+        this.wsAssignmentService.postEntry(this.element, {
             wsEntryTypeId: Models.Worksheet.WsEntryTypeEnum.chat,
             ownerUserId: this.ownerUserId as number,
-            sequenceNo: 0,
+            assignmentId: this.wsAssignmentService.assignment.id,
             jsonData: JSON.stringify({ text: this.textEntry }),
             textData: this.textEntry,
         }).then(() => {

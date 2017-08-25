@@ -63,7 +63,7 @@ function draggable(appModule) {
         '$window',
         ($scope, $element, $document, $window) => {
           let startX = 0;
-          let startY = 0;
+          let  startY = 0;
           const parentElement = $document[0].getElementById($scope.parentId);
           setStyle();
           $element.on('mousedown', event => {

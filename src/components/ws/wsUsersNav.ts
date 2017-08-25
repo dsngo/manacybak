@@ -28,7 +28,7 @@ export default class WsUsersNav extends ComponentBase {
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
         public identityService: IdentityService,

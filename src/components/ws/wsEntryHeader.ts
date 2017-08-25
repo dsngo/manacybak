@@ -1,5 +1,5 @@
 import UserService from "../../services/userService";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 
 export default class WsEntryHeader extends ComponentBase {
@@ -26,15 +26,15 @@ export default class WsEntryHeader extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID, UserService.IID];
+    public static $inject = [WsAssignmentService.IID, UserService.IID];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      * @param userService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public userService: UserService,
     ) {
         super();

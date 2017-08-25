@@ -536,7 +536,7 @@
   border-radius: $border-radius;
   height: 50px;
   width: 50px;
-  padding: 0;
+  padding: 7px 0 0 0;
   color: $text-color;
   font-size: 20px;
   
@@ -695,7 +695,7 @@
 
 .mobile-wrapper {
   position: absolute;
-  width: 100%;
+  width: 95%;
   top: 0;
   left: 0;
   z-index: $zindex-sub-panel;

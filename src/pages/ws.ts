@@ -1,5 +1,5 @@
 import * as uiRouter from "angular-ui-router";
-import WsService from "../services/wsService";
+import WsAssignmentService from "../services/wsAssignmentService";
 import AuthorizedPage from "./authorizedPage";
 
 export default class WsPage extends AuthorizedPage {
@@ -32,13 +32,15 @@ export default class WsPage extends AuthorizedPage {
         url: "/ws/:wsId",
         abstract: true,
         resolve: {
-            wsService: [WsService.IID, "$transition$", "$q", (wsService: WsService, $transition$: uiRouter.Transition, $q: ng.IQService) => {
-                const wsId = $transition$.params().wsId;
-                return $q.all([wsService.load(wsId), wsService.loadBlobDataList(wsId)]).then(() => wsService);
+            wsAssignmentService: [WsAssignmentService.IID, "$transition$", "$q", (wsAssignmentService: WsAssignmentService, $transition$: uiRouter.Transition, $q: ng.IQService) => {
+                const assignmentId = $transition$.params().wsId;
+                return wsAssignmentService.load(assignmentId)
+                    .then(() => wsAssignmentService.loadBlobDataList(wsAssignmentService.ws.wsElementId))
+                    .then(() => wsAssignmentService);
             }],
         },
     };
 
-    public wsService: WsService;
+    public wsAssignmentService: WsAssignmentService;
 
 }

@@ -30,7 +30,7 @@ export default class WsOriginCategoryNav extends ComponentBase {
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
         public wsEditorService: WsEditorService,

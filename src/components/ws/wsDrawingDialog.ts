@@ -33,7 +33,7 @@ export default class WsDrawingDialog extends AppDialog {
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
         public $mdDialog: ng.material.IDialogService,
@@ -42,13 +42,4 @@ export default class WsDrawingDialog extends AppDialog {
         super($mdDialog);
     }
 
-    public cancel(): void {
-
-        const thisComponent = this;
-
-        // parentElementパラメーターをダイアログに渡す
-        // const dialogOption = WsDrawingDialog.getDialogOptions($event);
-
-        this.$mdDialog.cancel();
-    }
 }

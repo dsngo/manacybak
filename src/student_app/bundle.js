@@ -337,7 +337,7 @@ var PeerWorksheetPage = (function (_super) {
     };
     Object.defineProperty(PeerWorksheetPage.prototype, "userGroups", {
         get: function () {
-            return this.wsService.ws.enableGroup ? this.wsService.myUserGroups : this.wsService.userGroups;
+            return this.wsAssignmentService.ws.enableGroup ? this.wsAssignmentService.myUserGroups : this.wsAssignmentService.userGroups;
         },
         enumerable: true,
         configurable: true

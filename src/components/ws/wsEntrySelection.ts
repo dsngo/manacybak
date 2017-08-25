@@ -28,7 +28,7 @@ export default class WsEntrySelection extends WsElementBase {
             // 記入可能の場合、自分自身の書込は表示しない（入力欄に表示する）
             if (entry.createUserId === thisComponent.currentUser.id && this.accessLevel === 2) { return false; }
             // 共有レベルのチェック
-            return thisComponent.wsService.CheckEntryEnable(entry, thisComponent.ownerUserId, true);
+            return thisComponent.wsAssignmentService.CheckEntryEnable(entry, thisComponent.ownerUserId, true);
         };
     }
 

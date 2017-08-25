@@ -1,7 +1,7 @@
 import Models from "../../models/models";
 import IdentityService from "../../services/IdentityService";
 import UserService from "../../services/userService";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 import { IWsElementParams } from "./wsElementParams";
 
@@ -50,14 +50,14 @@ export default class WsElementBase extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID, UserService.IID, IdentityService.IID, "$scope"];
+    public static $inject = [WsAssignmentService.IID, UserService.IID, IdentityService.IID, "$scope"];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public userService: UserService,
         public identityService: IdentityService,
         public $scope: ng.IScope,
@@ -96,11 +96,11 @@ export default class WsElementBase extends ComponentBase {
         this.$scope.$on("element:validate:" + this.element.wsElementId, (event: ng.IAngularEvent) => {
             if (!this.params.editMode) {
                 if (!this.isValid()) {
-                    // this.wsService.setValid(this.params.element, false);
+                    // this.wsAssignmentService.setValid(this.params.element, false);
                     this.params.isValid = false;
                 }
                 if (this.isDirty()) {
-                    // this.wsService.setDirty(this.params.element, true);
+                    // this.wsAssignmentService.setDirty(this.params.element, true);
                     this.params.isDirty = true;
                 }
             }
@@ -109,7 +109,7 @@ export default class WsElementBase extends ComponentBase {
         // ws:validateイベントリスナを登録する
         this.$scope.$on("ws:checkDirty", (event: ng.IAngularEvent) => {
             if (this.params.isDirty) {
-                this.wsService.setDirty();
+                this.wsAssignmentService.setDirty();
             }
         });
     }
@@ -118,7 +118,7 @@ export default class WsElementBase extends ComponentBase {
      * element:saveイベントを発生させ、すべてのelementコンポーネントを保存する。
      */
     // public save() {
-    //     this.wsService.save(this.$scope);
+    //     this.wsAssignmentService.save(this.$scope);
     //     // if (this.$scope.$root) {
     //     //     this.$scope.$root.$broadcast("element:save:" + this.element.wsElementId);
     //     // }
@@ -132,7 +132,7 @@ export default class WsElementBase extends ComponentBase {
             this.params.isDirty = false;
             this.params.isValid = true;
             this.$scope.$root.$broadcast("element:validate:" + this.element.wsElementId);
-            this.wsService.checkDirty(this.$scope);
+            this.wsAssignmentService.checkDirty(this.$scope);
         }
     }
 
@@ -140,7 +140,7 @@ export default class WsElementBase extends ComponentBase {
      * elementが入力済で、保存可能状態(validated)かどうかを取得する
      */
     // public get isReadyToSave(): boolean {
-    //     return this.editMode ? false : this.wsService.isReadyToSave(this.element);
+    //     return this.editMode ? false : this.wsAssignmentService.isReadyToSave(this.element);
     // }
 
     /**
@@ -185,7 +185,7 @@ export default class WsElementBase extends ComponentBase {
     ) {
         this.getEntries(entryType).forEach((entry) => {
             // entryが表示対象かどうかを示す
-            if (this.wsService.CheckEntryEnable(entry, this.params.ownerUserId, isSingleValue)) {
+            if (this.wsAssignmentService.CheckEntryEnable(entry, this.params.ownerUserId, isSingleValue)) {
                 // entriesにauthorのkeyが存在しない場合は、空の配列を作成する
                 if (!(entry.createUserId in entries)) {
                     entries[entry.createUserId] = [];
@@ -217,7 +217,7 @@ export default class WsElementBase extends ComponentBase {
      * contentが存在しない／入力不可の場合はfalse
      */
     public get isRequired() {
-        return this.wsService.elementIsRequired(this.params.element);
+        return this.wsAssignmentService.elementIsRequired(this.params.element);
     }
 
     /**
@@ -225,7 +225,7 @@ export default class WsElementBase extends ComponentBase {
      * @param entryType
      */
     protected getEntries(entryType: Models.Worksheet.WsEntryTypeEnum): WsEntry.EntryArray {
-        return this.wsService.getEntryArray(this.params.element, entryType);
+        return this.wsAssignmentService.getEntryArray(this.params.element, entryType);
     }
 
     /**
@@ -233,18 +233,18 @@ export default class WsElementBase extends ComponentBase {
      * @param entryType
      */
     protected getMySingleEntry(entryType: Models.Worksheet.WsEntryTypeEnum): Models.Dtos.WsEntryDto {
-        return this.wsService.getSingleEntry(
+        return this.wsAssignmentService.getSingleEntry(
             this.params.element, entryType, this.params.ownerUserId, this.currentUser.id);
     }
 
     protected getEntriesByAuthor(userId: DtoIdType): WsEntry.EntryArray {
-        return this.wsService.getEntriesByAuthor(this.params.element, this.params.ownerUserId)[userId];
+        return this.wsAssignmentService.getEntriesByAuthor(this.params.element, this.params.ownerUserId)[userId];
     }
     /**
      * ElementのAccess Level
      */
     public get accessLevel() {
-        return this.wsService.getAccessPermission(
+        return this.wsAssignmentService.getAccessPermission(
             this.params.element, this.params.ownerUserId, this.currentUser);
     }
 

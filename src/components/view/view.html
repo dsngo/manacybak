@@ -1,60 +1,16 @@
-<div class="app-view-inner" layout="column" ng-class="{'device-mode': $ctrl.isDeviceMode(), 'desktop-mode': !$ctrl.isDeviceMode()}">
+<app-view-inner ng-class="{'device-mode': $ctrl.isDeviceMode(), 'desktop-mode': !$ctrl.isDeviceMode()}">
+    <md-progress-linear md-mode="indeterminate" ng-disabled="!$ctrl.identityService.isBusy"></md-progress-linear>
+
     <md-toolbar class="app-view-header" md-scroll-shrink>
-        <div class="md-toolbar-tools" layout="row">
-            <ng-transclude ng-transclude-slot="backTo" ng-if="$ctrl.canBackTo()" flex="none"></ng-transclude>
-            <ng-transclude ng-transclude-slot="header" flex="grow"></ng-transclude>
-
-            <md-menu flex="none">
-                <md-button aria-label="Menu" ng-click="$mdOpenMenu($event)" ng-class="{'md-icon-button': $ctrl.isDeviceMode()}">
-                    <md-icon ng-if="$ctrl.isDeviceMode()" md-menu-origin>menu</md-icon>
-                    <div ng-if="!$ctrl.isDeviceMode()" class="app-view-user-info">
-                        <app-avatar user-id="$ctrl.identityService.currentUser.id" class="nomargin"></app-avatar>
-                        <span>{{$ctrl.identityService.currentUser.displayName}}</span>
-                    </div>
-                </md-button>
-
-                <md-menu-content class="app-view-menu-content" width="4">
-                    <md-menu-item>
-                        <md-button ng-if="$ctrl.isDeviceMode()" ng-click="$ctrl.toggleBasicMenu()" md-prevent-menu-close>
-                            <div class="app-view-user-info">
-                                <app-avatar user-id="$ctrl.identityService.currentUser.id" class="nomargin"></app-avatar>
-                                <span flex="grow">{{$ctrl.identityService.currentUser.displayName}}</span>
-                            </div>
-                        </md-button>
-
-                        <div ng-if="!$ctrl.isDeviceMode()" class="app-view-user-info">
-                            <app-avatar user-id="$ctrl.identityService.currentUser.id" class="nomargin"></app-avatar>
-                            <span flex="grow">{{$ctrl.identityService.currentUser.displayName}}</span>
-                        </div>
-                    </md-menu-item>
-
-                    <div ng-show="$ctrl.hasOpenBasicMenu()" class="app-view-basic-menu">
-                        <md-menu-item>
-                            <md-button ng-href="/app2/student/user_detail.php">個人設定</md-button>
-                        </md-menu-item>
-
-                        <md-menu-item>
-                            <md-button ng-click="$ctrl.logoff()">ログアウト</md-button>
-                        </md-menu-item>
-                    </div>
-
-                    <ng-transclude ng-transclude-slot="nav" ng-if="$ctrl.containsNav() && $ctrl.isDeviceMode()" class="app-view-nav"></ng-transclude>
-                </md-menu-content>
-            </md-menu>
+        <div class="md-toolbar-tools">
+            <ng-transclude class="app-view-header-back-to" ng-transclude-slot="backTo"></ng-transclude>
+            <ng-transclude class="app-view-header-headline" ng-transclude-slot="headline"></ng-transclude>
+            <ng-transclude ng-if="!$ctrl.isDeviceMode()" class="app-view-header-toolbar" ng-transclude-slot="toolbar"></ng-transclude>
+            <app-view-menu class="app-view-header-menu">
+                <ng-transclude ng-if="$ctrl.isDeviceMode()" ng-transclude-slot="menuNav"></ng-transclude>
+            </app-view-menu>
         </div>
     </md-toolbar>
 
-    <md-content class="app-view-body">
-        <md-sidenav ng-transclude="nav" ng-if="$ctrl.containsNav() && !$ctrl.isDeviceMode()" class="app-view-nav md-sidenav-left padded" md-is-locked-open="$ctrl.hasOpenSideNav()"></md-sidenav>
-
-        <div class="app-view-side-nav-bar" ng-if="$ctrl.containsNav() && !$ctrl.isDeviceMode()" ng-class="{open: $ctrl.hasOpenSideNav()}" md-colors="{'background': 'background-400'}">
-            <md-button class="app-view-side-nav-toggler md-raised" md-colors="{'background': 'background-400'}" ng-click="$ctrl.toggleSideNav()">
-                <md-icon>{{$ctrl.hasOpenSideNav() ? "chevron_left" : "chevron_right"}}</md-icon>
-            </md-button>
-        </div>
-
-        <md-content class="app-view-content" ng-transclude="content"></md-content>
-    </md-content>
-</div>
-
-<md-progress-linear class="app-view-busy-bar" md-mode="indeterminate" ng-disabled="!$ctrl.identityService.isBusy"></md-progress-linear>
+    <md-content class="app-view-content-wrapper" ng-transclude="content"></md-content>
+</app-view-inner>

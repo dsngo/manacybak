@@ -1,4 +1,4 @@
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import ComponentBase from "../componentBase";
 
 export default class WsElementNav extends ComponentBase {
@@ -23,14 +23,14 @@ export default class WsElementNav extends ComponentBase {
     /**
      * InjectするService
      */
-    public static $inject = [WsService.IID];
+    public static $inject = [WsAssignmentService.IID];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
     ) {
         super();
     }

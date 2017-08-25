@@ -1,6 +1,6 @@
 import IdentityService from "../../services/IdentityService";
 import UserService from "../../services/userService";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import Models from "./../../models/models";
 import WsEntryHelper from "./../../models/wsEntryHelper";
 import WsElementBase from "./wsElementBase";
@@ -32,21 +32,21 @@ export default class WsEntryMedia extends WsElementBase {
      * InjectするService
      */
     public static $inject =
-    [WsService.IID, UserService.IID, IdentityService.IID, "$scope", "$mdMedia", "$mdDialog"];
+    [WsAssignmentService.IID, UserService.IID, IdentityService.IID, "$scope", "$mdMedia", "$mdDialog"];
 
     /**
      * コンストラクタ
-     * @param wsService
+     * @param wsAssignmentService
      */
     public constructor(
-        public wsService: WsService,
+        public wsAssignmentService: WsAssignmentService,
         public userService: UserService,
         public identityService: IdentityService,
         public $scope: ng.IScope,
         public $mdMedia: ng.material.IMedia,
         public $mdDialog: ng.material.IDialogService,
     ) {
-        super(wsService, userService, identityService, $scope);
+        super(wsAssignmentService, userService, identityService, $scope);
     }
 
     protected onLoad() {

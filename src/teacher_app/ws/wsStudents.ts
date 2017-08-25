@@ -1,7 +1,7 @@
 import * as uiRouter from "angular-ui-router";
 import * as _ from "lodash";
 import AutoRefreshWsPage from "../../pages/autoRefreshWs";
-import WsService from "../../services/wsService";
+import WsAssignmentService from "../../services/wsAssignmentService";
 import app from "../app";
 
 class WsStudentsPage extends AutoRefreshWsPage {
@@ -52,7 +52,7 @@ class WsStudentsPage extends AutoRefreshWsPage {
     }
 
     public get userGroups() {
-        return this.wsService.userGroups;
+        return this.wsAssignmentService.userGroups;
     }
 
     public onUserClick(userId: DtoIdType) {

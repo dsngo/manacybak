@@ -28,4 +28,5 @@ import "./templates/templates";
 import "./ws/wsEditor";
 import "./ws/wsElements";
 import "./ws/wsList";
+import "./wssettings/wssettings";
 import "./ws/wsStudents";
